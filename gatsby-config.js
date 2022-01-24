@@ -4,7 +4,7 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: [
-    "gatsby-plugin-mdx", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
+    "gatsby-transformer-sharp", "gatsby-plugin-mdx", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/icon.png"
