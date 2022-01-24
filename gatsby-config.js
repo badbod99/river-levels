@@ -4,12 +4,12 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: [
-    "gatsby-transformer-sharp", "gatsby-plugin-mdx", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
+  "gatsby-plugin-sharp", "gatsby-remark-images", "gatsby-transformer-sharp", "gatsby-plugin-mdx", "gatsby-plugin-image", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/icon.png"
     }
-  }, "gatsby-plugin-mdx", "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
+  }, "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
     options: {
       "name": "images",
@@ -30,5 +30,18 @@ module.exports = {
       "path": "./rivers/"
     },
     __key: "rivers"
+  }, {
+    resolve: "gatsby-plugin-mdx",
+    options: {
+      gatsbyRemarkPlugins: [{
+        resolve: `gatsby-remark-images`,
+        options: {
+          // It's important to specify the maxWidth (in pixels) of
+          // the content container as this plugin uses this as the
+          // base for generating different widths of each image.
+          maxWidth: 690,
+        },
+      }]
+    }
   }]
 };
