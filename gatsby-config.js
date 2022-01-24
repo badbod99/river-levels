@@ -3,7 +3,8 @@ module.exports = {
       title: `River Levels`,
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-plugin-image", "gatsby-plugin-sitemap", {
+  plugins: [
+    "gatsby-plugin-image", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
     options: {
       "icon": "src/images/icon.png"
@@ -22,5 +23,12 @@ module.exports = {
       "path": "./src/pages/"
     },
     __key: "pages"
+  },  {
+    resolve: 'gatsby-source-filesystem',
+    options: {
+      "name": "rivers",
+      "path": "./rivers/"
+    },
+    __key: "rivers"
   }]
 };
