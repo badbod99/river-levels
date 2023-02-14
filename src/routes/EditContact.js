@@ -5,7 +5,7 @@ import { Form,
 } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { updateContact } from "../contacts";
+import { updateContact } from "../services/ContactService";
 
 export async function action({ request, params }) {
   const formData = await request.formData();

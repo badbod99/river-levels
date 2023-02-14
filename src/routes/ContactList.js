@@ -1,13 +1,9 @@
 import '../App.css';
 import Button from '@mui/material/Button';
-import { Link, NavLink } from '../components/Link';
+import { NavLink } from '../components/Link';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 import {
   Outlet,
   useLoaderData,
@@ -16,7 +12,7 @@ import {
   useNavigation,
   useSubmit,
 } from "react-router-dom";
-import { getContacts, createContact } from "../contacts";
+import { getContacts, createContact } from "../services/ContactService";
 import { useEffect } from "react";
 
 export async function action() {
@@ -31,7 +27,7 @@ export async function loader({ request }) {
   return { contacts, q };
 }
 
-export default function Root() {
+export default function ContactList() {
   const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
   const submit = useSubmit();

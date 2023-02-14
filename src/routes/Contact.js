@@ -9,7 +9,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {
   getContact,
   updateContact,
-} from "../contacts";
+} from "../services/ContactService";
+import { Link } from '../components/Link';
 
 export async function action({ request, params }) {
   let formData = await request.formData();
@@ -38,6 +39,7 @@ export default function Contact() {
         <img
           key={contact.avatar}
           src={contact.avatar || null}
+          alt="Avatar"
         />
       </div>
 
@@ -55,12 +57,14 @@ export default function Contact() {
 
         {contact.twitter && (
           <p>
-            <a
+            <Link
               target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
+              to={`https://twitter.com/${contact.twitter}`}
+              alt="Twitter"
+              rel="noreferrer"
             >
               {contact.twitter}
-            </a>
+            </Link>
           </p>
         )}
 
@@ -94,7 +98,6 @@ export default function Contact() {
 
 function Favorite({ contact }) {
   const fetcher = useFetcher();
-  // yes, this is a `let` for later
   let favorite = contact.favorite;
   if (fetcher.formData) {
     favorite = fetcher.formData.get("favorite") === "true";
