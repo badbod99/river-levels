@@ -23,7 +23,6 @@ export async function loader({ request }) {
 export default function StationList() {
   const { stations, q } = useLoaderData();
   const navigation = useNavigation();
-  const submit = useSubmit();
   useEffect(() => {
     document.getElementById("q").value = q;
   }, [q]);
@@ -34,7 +33,6 @@ export default function StationList() {
       "q"
     );
   const loading = navigation.state === "loading";
-  const isFirstSearch = q == null;
 
   return (
     <Container maxWidth="sm">
@@ -50,17 +48,11 @@ export default function StationList() {
               label="Search stations"
               placeholder="Search"
               type="search"
-              required
               variant="filled"
               name="q"
               margin="normal"
               fullWidth
               defaultValue={q}
-              onChange={(event) => {
-                submit(event.currentTarget.form, {
-                  replace: !isFirstSearch,
-                });
-              }}
             />
             {(searching || loading)
               ? (<LinearProgress sx={{ marginBottom: 2 }} />)

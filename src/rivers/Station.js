@@ -21,7 +21,7 @@ export default function Station() {
 
   return (
     <>
-      <div>{station.label}</div>
+      <h2>{station.label}</h2>
       <div>{station.riverName}</div>
       <div>{station.catchmentName}</div>
       <div>{station.eaAreaName}</div>
