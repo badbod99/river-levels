@@ -17,7 +17,7 @@ import Layout from './Layout';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <StationList />,
     errorElement: <ErrorPage />,
     loader: rootLoader,
     children: [

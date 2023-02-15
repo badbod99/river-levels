@@ -1,6 +1,5 @@
 
 import Grid from '@mui/material/Grid';
-import StationList from './rivers/StationList';
 import {
   Outlet,
 } from "react-router-dom";
@@ -16,12 +15,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Layout = () => (
+const Layout = ({ children }) => (
   <Box sx={{ flexGrow: 1 }}>
     <Grid container spacing={2}>
       <Grid item xs={5} md={4}>
         <Item>
-          <StationList />
+          { children }
         </Item>
       </Grid>
       <Grid item xs={7} md={8}>

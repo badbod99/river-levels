@@ -2,7 +2,8 @@ const getStations = async (q) => {
   const url = 'http://environment.data.gov.uk/flood-monitoring/id/stations?';
   const params = new URLSearchParams({
     parameter: 'level',
-    status: 'Active'
+    status: 'Active',
+    _limit: 10,
   });
   if (q) params.set('riverName', q);
   const stationData = await fetch(url + params);
