@@ -8,7 +8,7 @@ import {
   useNavigation,
 } from "react-router-dom";
 import { getStations } from "../services/EAService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from '../Layout';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -24,9 +24,7 @@ export async function loader({ request }) {
 export default function StationList() {
   const { stations, q } = useLoaderData();
   const navigation = useNavigation();
-  useEffect(() => {
-    document.getElementById("q").value = q;
-  }, [q]);
+  const [search, setSearch] = useState(q);
 
   const searching =
     navigation.location &&
@@ -34,6 +32,7 @@ export default function StationList() {
       "q"
     );
   const loading = navigation.state === "loading";
+  const existingSearch = search ?? '';
 
   return (
     <Layout>
@@ -53,6 +52,10 @@ export default function StationList() {
               margin="normal"
               fullWidth
               defaultValue={q}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              value={search}
             />
             {(searching || loading)
               ? (<LinearProgress sx={{ marginBottom: 2 }} />)
@@ -64,7 +67,7 @@ export default function StationList() {
             <List>
               {stations.map((station) => (
                 <ListItem key={station.RLOIid}>
-                  <ListItemButton component={NavLinkBehavior} to={`station/${station.stationReference}`}>
+                  <ListItemButton component={NavLinkBehavior} to={`station/${station.stationReference}?q=${existingSearch}`}>
                     {station.riverName}
                     {' - '}
                     {station.label}
