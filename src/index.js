@@ -1,18 +1,34 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import { DarkTheme, LightTheme } from './theme';
+import { StyledEngineProvider } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+const TopLevel = () => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  return (
+    <React.StrictMode>
+    <StyledEngineProvider injectFirst>
+    <ThemeProvider theme={prefersDarkMode ? DarkTheme : LightTheme}>
+      <CssBaseline enableColorScheme />
+      <App />
+    </ThemeProvider>
+    </StyledEngineProvider>
   </React.StrictMode>
+  );
+}
+
+root.render(
+  <TopLevel />
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,14 +1,11 @@
-import '../App.css';
 import { NavLink } from '../components/Link';
 import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import LinearProgress from '@mui/material/LinearProgress';
 import {
-  Outlet,
   useLoaderData,
   Form,
   useNavigation,
-  useSubmit,
 } from "react-router-dom";
 import { getStations } from "../services/EAService";
 import { useEffect } from "react";
@@ -35,61 +32,58 @@ export default function StationList() {
   const loading = navigation.state === "loading";
 
   return (
-    <Container maxWidth="sm">
-      <div id="detail">
-       <Outlet />
+    <div id="sidebar">
+      <Typography variant="h3" component="h1" gutterBottom>
+        Station List
+      </Typography>
+      <div>
+        <Form id="search-form" role="search">
+          <TextField
+            id="q"
+            label="Search stations"
+            placeholder="Search"
+            type="search"
+            variant="filled"
+            name="q"
+            margin="normal"
+            fullWidth
+            defaultValue={q}
+          />
+          {(searching || loading)
+            ? (<LinearProgress sx={{ marginBottom: 2 }} />)
+            : null }
+        </Form>
       </div>
-      <div id="sidebar">
-        <h1>Station List</h1>
-        <div>
-          <Form id="search-form" role="search">
-            <TextField
-              id="q"
-              label="Search stations"
-              placeholder="Search"
-              type="search"
-              variant="filled"
-              name="q"
-              margin="normal"
-              fullWidth
-              defaultValue={q}
-            />
-            {(searching || loading)
-              ? (<LinearProgress sx={{ marginBottom: 2 }} />)
-              : null }
-          </Form>
-        </div>
-        <nav>
-          {stations?.length ? (
-            <ul>
-              {stations.map((station) => (
-                <li key={station.RLOIid}>
-                  <NavLink
-                    to={`station/${station.stationReference}`}
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? "active"
-                        : isPending
-                        ? "pending"
-                        : ""
-                    }
-                  >
-                    {station.riverName}
-                    {' - '}
-                    {station.label}
-                    {' - '}
-                    {station.stationReference}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>
-              <i>No stations</i>
-            </p>
-          )}
-        </nav>
-      </div>      
-    </Container>
+      <nav>
+        {stations?.length ? (
+          <ul>
+            {stations.map((station) => (
+              <li key={station.RLOIid}>
+                <NavLink
+                  to={`station/${station.stationReference}`}
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? "active"
+                      : isPending
+                      ? "pending"
+                      : ""
+                  }
+                >
+                  {station.riverName}
+                  {' - '}
+                  {station.label}
+                  {' - '}
+                  {station.stationReference}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>
+            <i>No stations</i>
+          </p>
+        )}
+      </nav>
+    </div>
   );
 }

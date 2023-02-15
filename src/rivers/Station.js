@@ -4,6 +4,7 @@ import {
 import {
   getStation,
 } from "../services/EAService";
+import Typography from '@mui/material/Typography';
 
 export async function loader({ params }) {
   const station = await getStation(params.stationid);
@@ -21,7 +22,9 @@ export default function Station() {
 
   return (
     <>
-      <h2>{station.label}</h2>
+      <Typography variant="h4" component="h2" gutterBottom>
+        {station.label}
+      </Typography>
       <div>{station.riverName}</div>
       <div>{station.catchmentName}</div>
       <div>{station.eaAreaName}</div>

@@ -4,7 +4,7 @@ const getStations = async (q) => {
     parameter: 'level',
     status: 'Active'
   });
-  if (q) params.set('search', q);
+  if (q) params.set('riverName', q);
   const stationData = await fetch(url + params);
   const allData = await stationData.json();
   const riverData = allData.items.filter((s) => !!(s.riverName));

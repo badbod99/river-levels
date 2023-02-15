@@ -12,11 +12,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Summary from "./contacts/Summary";
+import Layout from './Layout';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <StationList />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     loader: rootLoader,
     children: [
