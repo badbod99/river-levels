@@ -28,9 +28,7 @@ export default function StationList() {
 
   const searching =
     navigation.location &&
-    new URLSearchParams(navigation.location.search).has(
-      "q"
-    );
+    new URLSearchParams(navigation.location.search).has("q");
   const loading = navigation.state === "loading";
   const existingSearch = search ?? '';
 
